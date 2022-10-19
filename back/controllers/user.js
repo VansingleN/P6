@@ -26,14 +26,14 @@ exports.login = (req, res) => {
         .then(user => {
             // S'il n'est pas bon on envoie un message neutre inidiquant l'erreur et on arrête la fonction
             if (!user) {
-                return res.status(401).json({message: 'Paire login/mot de passe incorrecte'})
+                return res.status(401).json({message: 'Nom d\'utilisateur ou mot de passe incorrect'})
             }
             // S'il est correct on compare ensuite le mot de passe avec le mot de passe qui à été enregistré lors du signup de cet email
             bcrypt.compare(req.body.password, user.password)
                 .then(valid => {
                     // S'il est incorrect, on renvoie le même message neutre que pour l'email
                     if (!valid) {
-                        return res.status(401).json({message: 'Paire login/mot de passe incorrecte'})
+                        return res.status(401).json({message: 'Nom d\'utilisateur ou mot de passe incorrect'})
                     }
                     // Si tout est correct, on assigne un token
                     res.status(200).json({

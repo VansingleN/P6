@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const path = require('path')
 const rateLimit = require('express-rate-limit')
+const mongoSanitize = require('express-mongo-sanitize')
 require('dotenv').config()
 
 
@@ -34,6 +35,8 @@ const limiter = rateLimit({
 
 app.use(express.json())
 // Applique le middleware de limitation à toutes les requêtes
+app.use(mongoSanitize())
+// Applique l'assainissement des données fournies par l'utilisateur pour se prémunir des injections maveillantes
 app.use(limiter)
 // Applique le middleware CORS pour rendre le serveur accessible aux autre domaines
 app.use(cors())
