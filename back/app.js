@@ -4,7 +4,9 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const path = require('path')
+const rateLimit = require('express-rate-limit')
 require('dotenv').config()
+
 
 // Décalration d'express dans une constante pour pouvoir la réutiliser plus bas
 const app = express()
@@ -22,10 +24,22 @@ mongoose.connect(`mongodb+srv://${process.env.mongoUsername}:${process.env.mongo
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'))
 
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limite chaque IP à 100 requêtes par fenêtre (ici, toutes les 15 minutes)
+  message: 'Trop de connexions provenant de la même adresse, réessayer plus tard'
+})
+
 // Initialisation des middlewares importés en haut du fichier...
-app.use(express.json());
+
+app.use(express.json())
+// Applique le middleware de limitation à toutes les requêtes
+app.use(limiter)
+// Applique le middleware CORS pour rendre le serveur accessible aux autre domaines
 app.use(cors())
-app.use(bodyParser.json());
+// Applique le bodyParser pour récuperer une valeur javascript utilisable 
+app.use(bodyParser.json())
+
 // ...Ainsi que des différentes routes nécessaires
 app.use('/api/auth', userRoutes);
 app.use('/api/sauces', sauceRoutes);
