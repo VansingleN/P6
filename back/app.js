@@ -9,7 +9,6 @@ const mongoSanitize = require('express-mongo-sanitize')
 const helmet = require('helmet')
 require('dotenv').config()
 
-
 // Déclaration d'express dans une constante pour pouvoir la réutiliser plus bas
 const app = express()
 
