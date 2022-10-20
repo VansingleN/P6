@@ -13,4 +13,5 @@ passwordSchema
     .has().digits()
     .has().not().spaces()
 
+// Exportation du schéma de mot de passe
 module.exports = passwordSchema
