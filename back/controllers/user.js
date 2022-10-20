@@ -6,7 +6,7 @@ const User = require('../models/User')
 // Exportation de la fonction permettant d'initialiser un nouvel utilisateur (en cryptant son mot de passe)
 exports.signup = (req, res, next) => {
 
-    bcrypt.hash(req.body.password, process.env.rounds)
+    bcrypt.hash(req.body.password, parseInt(process.env.rounds))
         .then(hash => {
             const user = new User({
                 email: req.body.email,
