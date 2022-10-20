@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 const User = require('../models/User')
 
 // Exportation de la fonction permettant d'initialiser un nouvel utilisateur (en cryptant son mot de passe)
-exports.signup = (req, res, next) => {
+exports.signup = (req, res) => {
 
     bcrypt.hash(req.body.password, parseInt(process.env.rounds))
         .then(hash => {

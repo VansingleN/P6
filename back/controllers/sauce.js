@@ -4,7 +4,7 @@ const Sauce = require('../models/Sauce');
 const fs = require('fs');
 
 // Exportation de la fonction permettant d'ajouter une nouvelle sauce
-exports.createSauce = (req, res, next) => {
+exports.createSauce = (req, res) => {
   const sauceObject = JSON.parse(req.body.sauce)
   // On supprime l'id et l'userId assigné automatiquement afin de ne pas le confondre
   delete sauceObject._id
@@ -22,14 +22,14 @@ exports.createSauce = (req, res, next) => {
 }
 
 // Exportation de la fonction permettant de trouver une sauce
-exports.getOneSauce = (req, res, next) => {
+exports.getOneSauce = (req, res) => {
     Sauce.findOne({_id: req.params.id})
   .then((sauce) => res.status(200).json(sauce))
   .catch((error) => res.status(404).json({error: error}))
 }
 
 // Exportation de la fonction permettant de modifier une sauce
-exports.modifySauce = (req, res, next) => {
+exports.modifySauce = (req, res) => {
   const sauceObject = req.file ? {
       ...JSON.parse(req.body.sauce),
       imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
@@ -53,7 +53,7 @@ exports.modifySauce = (req, res, next) => {
 }
 
 // Exportation de la fonction permettant de supprimer une sauce
-exports.deleteSauce = (req, res, next) => {
+exports.deleteSauce = (req, res) => {
   Sauce.findOne({ _id: req.params.id})
       .then(sauce => {
           if (sauce.userId != req.auth.userId) {
@@ -74,14 +74,14 @@ exports.deleteSauce = (req, res, next) => {
 }
 
 // Exportation de la fonction permettant de sélectionner toutes les sauces
-exports.getAllSauces = (req, res, next) => {
+exports.getAllSauces = (req, res) => {
     Sauce.find()
     .then((sauces) => res.status(200).json(sauces))
     .catch((error) => res.status(400).json({error: error}))
 }
 
 // Exportation de la fonction permettant d'aimer ou détester une sauce
-exports.likeSauce = (req, res, next) => {
+exports.likeSauce = (req, res) => {
   // Si on ajoute un like sur la sauce
   if (req.body.like == 1) {
     // On trouve la sauce une première fois
