@@ -9,7 +9,6 @@ const auth = require('../middleware/auth')
 // Importation du middleware de gestion d'images multer
 const multer = require('../middleware/multer-config')
 
-
 // Construction des différentes routes accédantes aux fonctions relatives aux sauces
 router.get('/', auth, sauceCtrl.getAllSauces)
 router.post('/', auth, multer, sauceCtrl.createSauce)
