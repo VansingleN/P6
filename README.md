@@ -1,27 +1,17 @@
 # HotTakes
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.4.
+Pour exécuter l'API :
 
-## Development server
+Cloner le repository,
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Initialiser un fichier .env dans le dossier /back en y mettant les valeurs suivantes et en remplaçant les "*" par vos propres valeurs :
 
-## Code scaffolding
+mongoUsername = *** mongoPassword = *** secretToken = *** rounds = *** PORT = ***
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+mongoUsername étant l'utilisateur de la base de données mongoPassword étant le mot de passe de l'utilisateur de la base de données secretToken étant la clé secrète utilisée pour générer les jsonwebtoken rounds étant le nombre de tours de salage qu'on veux appliquer au mots de passes "hashés" par bcrypt PORT étant le port sur lequel on veux faire tourner notre API, par défaut 3000
 
-## Build
+Ouvrez un terminal (Linux/Mac) ou une invite de commande/PowerShell (Windows)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Exécutez npm install à partir du répertoire du projet
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Exécutez npm start
